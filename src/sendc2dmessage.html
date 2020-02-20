@@ -1,0 +1,54 @@
+<script type="text/x-red" data-template-name="sendc2dmessage">
+	<div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-connectionString"><i class="fa fa-bookmark"></i> connectionString</label>
+        <input type="text" id="node-input-connectionString">
+	</div>
+	<div class="form-row">
+        <label for="node-input-deviceId"><i class="fa fa-pencil"></i> deviceId</label>
+        <input type="text" id="node-input-deviceId">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="sendc2dmessage">
+	<p>A simple node for send cloud-to-device message on Azure IoT hub.</p
+
+	<h3>Input</h3>
+	<dl class="message-properties">
+		<dt>payload	</dt>
+		<dd> the payload of the message to send </dd>
+		<dt class="optional">deviceId</dt>
+		<dd> the deviceId to send message to. If not set, the deviceId will be extracted from <code>msg.deviceId</code></dd>
+	</dl>
+
+	<h3>Output</h3>
+	The node sends as output the send state.  <code>msg.error</code> is valiorized in case of error, otherwise <code>payload.result</code> contain the successfully send result.
+	<code>payload.source</code> contain the sent payload
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('sendc2dmessage', {
+		category: "cloud",
+		color: "#00abec",
+		defaults: {
+			deviceId: { value: "", required: false },
+			name: { value: "Azure IoT Hub C2d Sender" }
+		},
+		inputs: 1,
+		outputs: 1,
+		icon: "azureiothub.png",
+		label: function () {
+			return this.name || "Azure IoT Hub C2d Sender";
+		},
+		paletteLabel: function () {
+			return "Azure IoT Hub C2d Sender";
+		},
+		align: "right",
+		credentials: {
+			connectionString: { type: "text" }
+		}
+	});
+</script>

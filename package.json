@@ -1,0 +1,24 @@
+{
+  "name": "node-red-contrib-azure-iot-hub-c2d",
+  "version": "0.0.1",
+  "description": "Node to send Azure IoT C2D messages",
+  "author": {
+    "name": "Ivan Vaccari"
+  },
+  "keywords": [
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "sendC2dMessage": "src/sendc2dmessage.js"
+    }
+  },
+  "dependencies": {
+    "azure-iothub": "^1.1.10",
+    "uuid": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/mitechlogistics/node-red-contrib-azure-iot-hub-c2d.git"
+  }
+}
