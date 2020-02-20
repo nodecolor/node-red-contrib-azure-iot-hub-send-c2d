@@ -30,21 +30,23 @@ module.exports = function (RED) {
 
 		var disconnectHandler = () => {
 			cleanServiceClient();
-			node.status({ fill: "red", shape: "ring", text: "Disconnected" });
+			node.status({ fill: "red", shape: "dot", text: "Disconnected" });
 		}
 
 		var connect = () => {
 			if (reconnectTimeout) clearTimeout(reconnectTimeout);
 			cleanServiceClient();
+			node.status({ fill: "yellow", shape: "dot", text: "Connecting" });
 			serviceClient = Client.fromConnectionString(connectionString);
 			serviceClient.open(function (err) {
 				if (err) {
-					node.error('Could not connect: ' + err.message);
-					node.status({ fill: "red", shape: "ring", text: "Connection error" });
 					ready = false;
+					node.error('Could not connect: ' + err.message);
+					node.status({ fill: "red", shape: "dot", text: "Disconnected" });
+					reconnectTimeout = setTimeout(connect, 4000);
 				} else {
 					ready = true;
-					node.status({ fill: "green", shape: "ring", text: "Connected" });
+					node.status({ fill: "green", shape: "dot", text: "Connected" });
 					serviceClient.on('disconnect', function () {
 						disconnectHandler(node);
 						reconnectTimeout = setTimeout(connect, 4000);
@@ -66,22 +68,22 @@ module.exports = function (RED) {
 				message.ack = 'full';
 				message.messageId = uuidv4();
 
-				node.status({ fill: "yellow", shape: "ring", text: "Sending" });
+				node.status({ fill: "yellow", shape: "dot", text: "Sending" });
 				serviceClient.send(msg.deviceId || deviceId, msg.payload, (error, result) => {
 
 					// set the correct status and send out a coherent message for evary case
 
 					if (error){
-						node.status({ fill: "red", shape: "ring", text: "Error" });
+						node.status({ fill: "red", shape: "dot", text: "Error" });
 						return node.send({ payload: { error: error, source: msg } });	
 					}
 
 					if (result){
-						node.status({ fill: "green", shape: "ring", text: "Sent" });
+						node.status({ fill: "green", shape: "dot", text: "Sent" });
 						return node.send({ payload: { result: result.constructor.name, source: msg } });
 					}
 
-					node.status({ fill: "red", shape: "ring", text: "Error" });
+					node.status({ fill: "red", shape: "dot", text: "Error" });
 					return node.send({ payload: { error: 'Unknown result', source: msg } });
 				});
 				return;
@@ -89,11 +91,11 @@ module.exports = function (RED) {
 
 			// notify the user if the node is not ready 
 			if (!serviceClient) {
-				node.status({ fill: "red", shape: "ring", text: "Not initialized" });
+				node.status({ fill: "red", shape: "dot", text: "Not initialized" });
 				return node.error('Iot service client not initialized');
 			}
 			if (!ready) {
-				node.status({ fill: "red", shape: "ring", text: "Not ready" });
+				node.status({ fill: "red", shape: "dot", text: "Not ready" });
 				return node.error('Iot service client not ready');
 			}
 		});

@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-azure-iot-hub-c2d",
+  "name": "node-red-contrib-azure-iot-hub-send-c2d",
   "version": "0.0.1",
   "description": "Node to send Azure IoT C2D messages",
   "author": {
@@ -19,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/mitechlogistics/node-red-contrib-azure-iot-hub-c2d.git"
+    "url": "https://bitbucket.org/mitechlogistics/node-red-contrib-azure-iot-hub-send-c2d.git"
   }
 }
