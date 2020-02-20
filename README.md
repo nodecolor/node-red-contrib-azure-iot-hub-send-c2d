@@ -1,5 +1,5 @@
-# node-red-contrib-azure-iot-hub-c2d 
-node-red-contrib-azure-iot-hub-c2d  is a node-red node that allows you to send *cloud to device* with Azure IoT Hub.
+# node-red-contrib-azure-iot-hub-send-c2d 
+node-red-contrib-azure-iot-hub-send-c2d  is a node-red node that allows you to send *cloud to device* with Azure IoT Hub.
 
 If you need nodes to receive messages or to send messages *as a device*, check out the package **node-red-contrib-azure-iot-hub**
 
