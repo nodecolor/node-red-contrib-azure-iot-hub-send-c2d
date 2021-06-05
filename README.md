@@ -1,5 +1,5 @@
 # node-red-contrib-azure-iot-hub-send-c2d 
-node-red-contrib-azure-iot-hub-send-c2d  is a node-red node that allows you to send *cloud to device* with Azure IoT Hub.
+node-red-contrib-azure-iot-hub-send-c2d  is a node-red node that allows you to send *cloud to device* messages with Azure IoT Hub.
 
 If you need nodes to receive messages or to send messages *as a device*, check out the package **node-red-contrib-azure-iot-hub**
 
@@ -11,7 +11,7 @@ If you need nodes to receive messages or to send messages *as a device*, check o
 
 
 ## Usage
-This node just connect to the IoT Hub and send the message to a specified device. The node will send *msg.payload* to the device with id as *msg.deviceId*.
+This node just connect to the IoT Hub and send the message to a specified device. The node will send *msg.payload* to the device having id as defined in *msg.deviceId*.
 
 You also need a connectionString, which is used to connect and authenticate to the IoT HUB. 
-This value can be found in the Azure IoT portal. Go to services > shared access policies and pick one entry connection string (or create an entry). Be sure the entry has the serviceConnect permission.
+This value can be found in the Azure IoT portal. Go to **Azure IoT Hub Portal > services > shared access policies** and pick one entry connection string (or create an entry). Be sure the entry has the serviceConnect permission.
